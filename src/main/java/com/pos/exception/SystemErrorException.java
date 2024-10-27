@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class SystemErrorException extends RuntimeException {
-    public SystemErrorException(String e) {
-        super(e != null ? e : "Terjadi Kesalahan pada sistem");
+    public SystemErrorException() {
+        super("Terjadi Kesalahan pada sistem");
     }
 
 }
