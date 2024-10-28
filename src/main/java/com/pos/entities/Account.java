@@ -33,6 +33,9 @@ public class Account extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AccountRole role;
 
+    @Column(name = "avatar")
+    private String avatar;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
