@@ -9,6 +9,8 @@ public interface AccountRepository extends JpaRepository<Account, String> {
 
     Optional<Account> findByUsernameAndActiveTrue(String username);
 
+    Optional<Account> findByIdAndActiveTrue(String id);
+
     boolean existsAccountByUsernameAndActiveTrue(String username);
 
 }

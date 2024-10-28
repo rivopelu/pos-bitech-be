@@ -1,5 +1,6 @@
 package com.pos.service.impl;
 
+import com.pos.entities.Account;
 import com.pos.entities.Client;
 import com.pos.entities.ClientContact;
 import com.pos.entities.repositories.AccountRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +31,12 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ResponseEnum createClient(RequestCreateClient req) {
         boolean checkExistClient = clientRepository.existsClientByCompanyNameAndActiveTrue(req.getCompanyName());
-        boolean checkPic = accountRepository.existsAccountByUsernameAndActiveTrue(req.getPicId());
-        if (checkPic){
+        Optional<Account> findAccount = accountRepository.findByIdAndActiveTrue(req.getPicId());
+        if (findAccount.isEmpty()) {
             throw new BadRequestException(ResponseEnum.PIC_NOT_FOUND);
         }
+        Account account = findAccount.get();
+
         if (checkExistClient) {
             throw new BadRequestException(ResponseEnum.CLIENT_ALREADY_EXIST);
         }
@@ -57,6 +61,7 @@ public class ClientServiceImpl implements ClientService {
                 clientContacts.add(buildContact);
             }
             clientContactRepository.saveAll(clientContacts);
+            account.setClient(client);
             return ResponseEnum.SUCCESS;
         } catch (Exception e) {
             throw new SystemErrorException(e);

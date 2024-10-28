@@ -36,6 +36,10 @@ public class Account extends BaseEntity implements UserDetails {
     @Column(name = "avatar")
     private String avatar;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
