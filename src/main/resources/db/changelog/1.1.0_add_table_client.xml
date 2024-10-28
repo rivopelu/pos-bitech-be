@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1.1.0" author="rivopelu (generated)">
+        <createTable tableName="client">
+            <!--            BASE ENTITY START-->
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="active" type="int(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(255)" defaultValue="SYSTEM">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_by" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_date" type="long">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_by" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="modified_date" type="long">
+                <constraints nullable="true"/>
+            </column>
+            <!--            BASE ENTITY END-->
+            <column name="company_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="company_logo" type="text">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+        <createTable tableName="client_contact">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="contact" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="type" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="client_contact"
+                                 baseColumnNames="client_id"
+                                 constraintName="client_contact_fk"
+                                 referencedTableName="client"
+                                 referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

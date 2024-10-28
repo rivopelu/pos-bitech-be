@@ -7,4 +7,5 @@
 
     <include file="classpath:db/changelog/1.0.0_add_table_account.xml"/>
     <include file="classpath:db/changelog/1.0.1_add_column_avatar_account.xml"/>
+    <include file="classpath:db/changelog/1.1.0_add_table_client.xml"/>
 </databaseChangeLog>
