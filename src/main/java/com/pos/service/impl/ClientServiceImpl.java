@@ -62,6 +62,7 @@ public class ClientServiceImpl implements ClientService {
             }
             clientContactRepository.saveAll(clientContacts);
             account.setClient(client);
+            accountRepository.save(account);
             return ResponseEnum.SUCCESS;
         } catch (Exception e) {
             throw new SystemErrorException(e);
