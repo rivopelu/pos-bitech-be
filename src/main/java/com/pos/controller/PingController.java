@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface PingController {
 
     @GetMapping
-    public String ping();
+    String ping();
 }

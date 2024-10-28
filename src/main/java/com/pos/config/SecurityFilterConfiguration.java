@@ -46,7 +46,7 @@ public class SecurityFilterConfiguration {
                                 "/ws/**")
                         .permitAll()
                         .anyRequest()
-                        .permitAll())
+                        .authenticated())
                 .exceptionHandling(e -> e.authenticationEntryPoint(
                         new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
         http.csrf(AbstractHttpConfigurer::disable);
